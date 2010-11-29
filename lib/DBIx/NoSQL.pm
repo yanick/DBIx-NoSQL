@@ -1,6 +1,6 @@
 package DBIx::NoSQL;
 BEGIN {
-  $DBIx::NoSQL::VERSION = '0.0010';
+  $DBIx::NoSQL::VERSION = '0.0011';
 }
 # ABSTRACT: Experimental NoSQL-ish overlay for an SQL database
 
@@ -30,7 +30,7 @@ DBIx::NoSQL - Experimental NoSQL-ish overlay for an SQL database
 
 =head1 VERSION
 
-version 0.0010
+version 0.0011
 
 =head1 SYNOPSIS
 
@@ -76,9 +76,9 @@ version 0.0010
 
 =head1 DESCRIPTION
 
-DBIx::NoSQL is a layer over DBI that presents a NoSQLish way to store and retrieve data. You do not need to prepare a schema beforehand to start putting data into your store
+DBIx::NoSQL is a layer over DBI that presents a NoSQLish way to store and retrieve data. You do not need to prepare a schema beforehand to start putting data in!
 
-Currently, it works by using JSON for serialization and SQLite as the database (though additional database support should not difficult to implement)
+Currently, data setting/getting works by using JSON for serialization and SQLite as the database (though additional database support should not be difficult to implement)
 
 The API is fairly sane, though still an early "alpha." At the moment, a better name for this package might be "DBIx::NoSQLite"
 
@@ -96,13 +96,23 @@ Connect to (creating if necessary) the SQLite database located at C<$path>
 
 Set C<$key> (a string) to C<$value> (a HASH reference) in C<$model>
 
+If C<$model> has index, this command will also update the index entry corresponding to C<$key>
+
 =head2 $value = $store->get( $model, $key )
 
 Get C<$value> matching C<$key> in C<$model>
 
+=head2 $value = $store->delete( $model, $key )
+
+Delete the entry matching C<$key> in C<$model>
+
+If C<$model> has index, this command will also delete the index entry corresponding to C<$key>
+
 =head2 ...
 
-For additional usage, see SYNOPSIS or look at the code. More documentation forthcoming
+For additional usage, see SYNOPSIS or look at the code
+
+More documentation forthcoming
 
 =head1 SEE ALSO
 

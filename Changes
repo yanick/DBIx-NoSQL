@@ -1,0 +1,7 @@
+0.0011 Sunday November 28 12:26:22 PST 2010:
+    - Added delete delegation to ::Store
+    - Fix record deletion in index
+
+0.0010 Saturday November 27 2010:
+    - Initial release
+

@@ -24,6 +24,7 @@ my %WriteMakefileArgs = (
   'PREREQ_PM' => {
     'Any::Moose' => '0',
     'Carp' => '0',
+    'DBD::SQLite' => '0',
     'DBIx::Class' => '0',
     'Digest::SHA' => '0',
     'Hash::Merge::Simple' => '0',
@@ -31,7 +32,7 @@ my %WriteMakefileArgs = (
     'Path::Class' => '0',
     'Try::Tiny' => '0'
   },
-  'VERSION' => '0.0010',
+  'VERSION' => '0.0011',
   'test' => {
     'TESTS' => 't/*.t'
   }
