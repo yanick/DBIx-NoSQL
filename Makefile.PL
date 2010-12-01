@@ -26,13 +26,15 @@ my %WriteMakefileArgs = (
     'Carp' => '0',
     'DBD::SQLite' => '0',
     'DBIx::Class' => '0',
+    'DateTime' => '0',
     'Digest::SHA' => '0',
     'Hash::Merge::Simple' => '0',
     'JSON' => '0',
     'Path::Class' => '0',
+    'SQL::Translator' => '0',
     'Try::Tiny' => '0'
   },
-  'VERSION' => '0.0011',
+  'VERSION' => '0.0012',
   'test' => {
     'TESTS' => 't/*.t'
   }
