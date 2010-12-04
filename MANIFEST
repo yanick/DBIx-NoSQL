@@ -20,6 +20,5 @@ t/02-class.t
 t/03-type-map.t
 t/04-stash.t
 t/05-migrate.t
-t/06-basic.t
-t/07-synopsis.t
+t/06-synopsis.t
 t/Test.pm
