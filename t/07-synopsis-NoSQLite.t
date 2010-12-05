@@ -3,12 +3,13 @@ use strict;
 use warnings;
 use Test::Most;
 use t::Test;
+use DBIx::NoSQLite;
 
 my ( $store, $store_file, $model, $result );
 $store_file = t::Test->tmp_sqlite;
 #$store_file = t::Test->test_sqlite( remove => 1 );
 
-$store = DBIx::NoSQL->connect( $store_file );
+$store = DBIx::NoSQLite->connect( $store_file );
 ok( $store );
 
 ok( ! $store->exists( 'Artist' => 'Smashing Pumpkins' ) );

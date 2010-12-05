@@ -1,5 +1,5 @@
 ---
-abstract: 'Experimental NoSQL-ish overlay for an SQL database'
+abstract: 'NoSQL-ish overlay for an SQL database'
 author:
   - 'Robert Krimen <robertkrimen@gmail.com>'
 build_requires:
@@ -17,11 +17,11 @@ requires:
   Any::Moose: 0
   Carp: 0
   DBD::SQLite: 0
-  DBIx::Class: 0
+  DBIx::Class: 0.08124
   Digest::SHA: 0
   Hash::Merge::Simple: 0
   JSON: 0
   Path::Class: 0
   SQL::Translator: 0
   Try::Tiny: 0
-version: 0.0013
+version: 0.0014

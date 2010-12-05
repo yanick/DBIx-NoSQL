@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.31;
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'Experimental NoSQL-ish overlay for an SQL database',
+  'ABSTRACT' => 'NoSQL-ish overlay for an SQL database',
   'AUTHOR' => 'Robert Krimen <robertkrimen@gmail.com>',
   'BUILD_REQUIRES' => {
     'Test::Most' => '0'
@@ -25,7 +25,7 @@ my %WriteMakefileArgs = (
     'Any::Moose' => '0',
     'Carp' => '0',
     'DBD::SQLite' => '0',
-    'DBIx::Class' => '0',
+    'DBIx::Class' => '0.08124',
     'Digest::SHA' => '0',
     'Hash::Merge::Simple' => '0',
     'JSON' => '0',
@@ -33,7 +33,7 @@ my %WriteMakefileArgs = (
     'SQL::Translator' => '0',
     'Try::Tiny' => '0'
   },
-  'VERSION' => '0.0013',
+  'VERSION' => '0.0014',
   'test' => {
     'TESTS' => 't/*.t'
   }

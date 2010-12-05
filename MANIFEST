@@ -15,10 +15,12 @@ lib/DBIx/NoSQL/Stash.pm
 lib/DBIx/NoSQL/Storage.pm
 lib/DBIx/NoSQL/Store.pm
 lib/DBIx/NoSQL/TypeMap.pm
+lib/DBIx/NoSQLite.pm
 t/01-basic.t
 t/02-class.t
 t/03-type-map.t
 t/04-stash.t
 t/05-migrate.t
 t/06-synopsis.t
+t/07-synopsis-NoSQLite.t
 t/Test.pm

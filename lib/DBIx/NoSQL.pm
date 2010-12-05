@@ -1,8 +1,8 @@
 package DBIx::NoSQL;
 BEGIN {
-  $DBIx::NoSQL::VERSION = '0.0013';
+  $DBIx::NoSQL::VERSION = '0.0014';
 }
-# ABSTRACT: Experimental NoSQL-ish overlay for an SQL database
+# ABSTRACT: NoSQL-ish overlay for an SQL database
 
 use strict;
 use warnings;
@@ -10,8 +10,13 @@ use warnings;
 use DBIx::NoSQL::Store;
 
 sub new {
-    my $class  = shift;
+    my $class = shift;
     return DBIx::NoSQL::Store->new( @_ );
+}
+
+sub connect {
+    my $class = shift;
+    return DBIx::NoSQL::Store->connect( @_ );
 }
 
 1;
@@ -22,25 +27,25 @@ sub new {
 
 =head1 NAME
 
-DBIx::NoSQL - Experimental NoSQL-ish overlay for an SQL database
+DBIx::NoSQL - NoSQL-ish overlay for an SQL database
 
 =head1 VERSION
 
-version 0.0013
+version 0.0014
 
 =head1 SYNOPSIS
 
     use DBIx::NoSQL;
 
-    my $store = DBIx::NoSQL->new;
-
-    $store->connect( 'store.sqlite' );
+    my $store = DBIx::NoSQL->connect( 'store.sqlite' );
 
     $store->set( 'Artist' => 'Smashing Pumpkins' => {
         name => 'Smashing Pumpkins',
         genre => 'rock',
         website => 'smashingpumpkins.com',
     } );
+
+    $store->exists( 'Artist' => 'Smashing Pumpkins' ); # 1
 
     $store->set( 'Artist' => 'Tool' => {
         name => 'Tool',
@@ -52,14 +57,14 @@ version 0.0013
     my $artist = $store->get( 'Artist' => 'Smashing Pumpkins' );
 
     # Set up a (searchable) index on the name field
-    $store->model( 'Artist' )->field( 'name' => ( index => 1 ) );
+    $store->model( 'Artist' )->index( 'name' );
     $store->model( 'Artist' )->reindex;
 
     for $artist ( $store->search( 'Artist' )->order_by( 'name DESC' )->all ) {
         ...
     }
 
-    $store->model( 'Album' )->field( 'released' => ( index => 1, isa => 'DateTime' ) );
+    $store->model( 'Album' )->index( 'released' => ( isa => 'DateTime' ) );
 
     $store->set( 'Album' => 'Siamese Dream' => {
         artist => 'Smashing Pumpkins',
@@ -72,27 +77,31 @@ version 0.0013
 
 =head1 DESCRIPTION
 
-DBIx::NoSQL is a layer over DBI that presents a NoSQLish way to store and retrieve data. You do not need to prepare a schema beforehand to start putting data in!
+DBIx::NoSQL is a layer over DBI that presents a NoSQLish way to store and retrieve data. It does this by using a table called C<__Store__>. Once connected to a database, it will detect if this table is missing and create it if necessary
 
-Currently, data setting/getting works by using JSON for serialization and SQLite as the database (though additional database support should not be difficult to implement)
+When writing data to the store, the data (a HASH reference) is first serialized using L<JSON> and then inserted/updated via L<DBIx::Class> to (currently) an SQLite backend
 
-The API is fairly sane, though still an early "alpha." At the moment, a better name for this package might be "DBIx::NoSQLite"
+Retrieving data from the store is done by key lookup or by searching an SQL-based index. Once found, the data is deserialized via L<JSON> and returned
+
+The API is fairly sane, though still beta
 
 =head1 USAGE
 
-=head2 $store = DBIx::NoSQL->new
+=head2 $store = DBIx::NoSQL->connect( $path )
 
-Returns a new DBIx::NoSQL store
+Returns a new DBIx::NoSQL store connected to the SQLite database located at C<$path>
 
-=head2 $store->connect( $path )
-
-Connect to (creating if necessary) the SQLite database located at C<$path>
+If the SQLite database file at C<$path> does not exist, it will be created
 
 =head2 $store->set( $model, $key, $value )
 
 Set C<$key> (a string) to C<$value> (a HASH reference) in C<$model>
 
 If C<$model> has index, this command will also update the index entry corresponding to C<$key>
+
+=head2 $value = $store->exists( $model, $key )
+
+Returns true if some data for C<$key> is present in C<$model>
 
 =head2 $value = $store->get( $model, $key )
 
@@ -104,7 +113,23 @@ Delete the entry matching C<$key> in C<$model>
 
 If C<$model> has index, this command will also delete the index entry corresponding to C<$key>
 
+=head2 $store->reindex
+
+Reindex the searchable/orderable data in C<$store>
+
+This method is smart, in that it won't reindex a model unless the schema for $store is different/has changed. That is, if the schema for C<$store> is the same as it is in the database, this call will do nothing
+
+Refer to "Model USAGE" below for more information
+
+=head2 $store->dbh
+
+Return the L<DBI> database handle for the store, if you need/want to do your own thing
+
 =head1 Search USAGE
+
+To search on a model, you must have installed an index on the field you want to search on
+
+Refer to "Model USAGE" for indexing information
 
 =head2 $search = $store->search( $model, [ $where ] )
 
@@ -142,7 +167,7 @@ Further refine the search in the same way C<< $search->where( ... ) >> does
 
 Further refine C<$search> with the given C<$where>
 
-A new object is cloned from the original, which is left untouched
+A new object is cloned from the original (the original C<$search> is left untouched)
 
 An index is required for the filtering columns
 
@@ -162,17 +187,59 @@ An index is required for the ordering columns
 
 Refer to L<SQL::Abstract> for the format of C<$order_by> (actually uses L<DBIx::Class::SQLMaker> under the hood)
 
-=head1 ...
+=head1 Model USAGE
 
-For additional usage, see SYNOPSIS or look at the code
+=head2 $model = $store->model( $model_name )
 
-More documentation forthcoming
+Retrieve or create the C<$model_name> model object
+
+=head2 $model->index( $field_name )
+
+    $store->model( 'Artist' )->index( 'name' ) # 'name' is now searchable/orderable, etc.
+
+Index C<$field_name> on C<$model>
+
+Every time the store for c<$model> is written to, the index will be updated with the value of C<$field>
+
+=head2 $model->index( $field_name, isa => $type )
+
+    $store->model( 'Artist' )->index( 'website', isa => 'URI' )
+    $store->model( 'Artist' )->index( 'founded', isa => 'DateTime' )
+
+Index C<$field_name> on C<$model> as a special type/object (e.g. L<DateTime> or L<URI>)
+
+Every time the store for c<$model> is written to, the index will be updated with the deflated value of C<$field> (since
+L<JSON> can not trivially serialize blessed references)
+
+=head2 $model->reindex
+
+Reindex the C<$model> data in the store after making a field indexing change:
+
+    1. Rebuild the DBIx::Class::ResultSource
+    2. Drop and recreate the search table for $model
+    3. Iterate through all the data for $model, repopulating the search table
+
+If C<$model> does not have an index, this method will simply return
+
+To rebuild the index for _every_ model (on startup, for example), you can do:
+
+    $store->reindex
+
+=head1 In the future
+
+Create a better interface for stashing and document it
+
+Wrap things in transactions that need it
+
+More tests: Always. Be. Testing.
 
 =head1 SEE ALSO
 
 L<KiokuDB>
 
 L<DBIx::Class>
+
+L<DBD::SQLite>
 
 =head1 AUTHOR
 
