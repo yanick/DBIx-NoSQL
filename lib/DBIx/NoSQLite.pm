@@ -1,6 +1,6 @@
 package DBIx::NoSQLite;
 BEGIN {
-  $DBIx::NoSQLite::VERSION = '0.0015';
+  $DBIx::NoSQLite::VERSION = '0.0016';
 }
 # ABSTRACT: An embedded, NoSQL SQLite database with SQL indexing
 
@@ -33,7 +33,7 @@ DBIx::NoSQLite - An embedded, NoSQL SQLite database with SQL indexing
 
 =head1 VERSION
 
-version 0.0015
+version 0.0016
 
 =head1 SYNOPSIS
 
@@ -67,7 +67,7 @@ Robert Krimen <robertkrimen@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Robert Krimen.
+This software is copyright (c) 2011 by Robert Krimen.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -1,6 +1,6 @@
 package DBIx::NoSQL;
 BEGIN {
-  $DBIx::NoSQL::VERSION = '0.0015';
+  $DBIx::NoSQL::VERSION = '0.0016';
 }
 # ABSTRACT: NoSQL-ish overlay for an SQL database
 
@@ -31,7 +31,7 @@ DBIx::NoSQL - NoSQL-ish overlay for an SQL database
 
 =head1 VERSION
 
-version 0.0015
+version 0.0016
 
 =head1 SYNOPSIS
 
@@ -247,7 +247,7 @@ Robert Krimen <robertkrimen@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Robert Krimen.
+This software is copyright (c) 2011 by Robert Krimen.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
