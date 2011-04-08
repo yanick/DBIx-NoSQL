@@ -33,7 +33,7 @@ my %WriteMakefileArgs = (
     'SQL::Translator' => '0',
     'Try::Tiny' => '0'
   },
-  'VERSION' => '0.0016',
+  'VERSION' => '0.0017',
   'test' => {
     'TESTS' => 't/*.t'
   }
