@@ -1,6 +1,6 @@
 package DBIx::NoSQLite;
 {
-  $DBIx::NoSQLite::VERSION = '0.0019';
+  $DBIx::NoSQLite::VERSION = '0.0020';
 }
 # ABSTRACT: An embedded, NoSQL SQLite database with SQL indexing
 
@@ -33,7 +33,7 @@ DBIx::NoSQLite - An embedded, NoSQL SQLite database with SQL indexing
 
 =head1 VERSION
 
-version 0.0019
+version 0.0020
 
 =head1 SYNOPSIS
 

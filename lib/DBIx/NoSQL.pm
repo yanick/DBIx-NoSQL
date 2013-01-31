@@ -1,6 +1,6 @@
 package DBIx::NoSQL;
 {
-  $DBIx::NoSQL::VERSION = '0.0019';
+  $DBIx::NoSQL::VERSION = '0.0020';
 }
 # ABSTRACT: NoSQL-ish overlay for an SQL database
 
@@ -31,7 +31,7 @@ DBIx::NoSQL - NoSQL-ish overlay for an SQL database
 
 =head1 VERSION
 
-version 0.0019
+version 0.0020
 
 =head1 SYNOPSIS
 

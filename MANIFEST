@@ -25,4 +25,5 @@ t/06-synopsis.t
 t/07-synopsis-NoSQLite.t
 t/08-persist.t
 t/09-file-connection.t
+t/10-next.t
 t/Test.pm

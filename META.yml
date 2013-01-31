@@ -24,4 +24,4 @@ requires:
   Path::Class: 0
   SQL::Translator: 0
   Try::Tiny: 0
-version: 0.0019
+version: 0.0020
