@@ -2,6 +2,10 @@ Revision history for DBIx-NoSQL
 
 {{$NEXT}}
 
+    [IMPROVEMENT]
+    - Switch from Any::Moose (which is deprecated) to Moose.
+        (nebulous + yanick)
+
 0.0020 Wednesday January 30 16:39:54 PST 2013:
     - Incorporate yanick's fixes to ->next
 
