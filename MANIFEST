@@ -10,7 +10,6 @@ README
 README.mkdn
 SIGNATURE
 cpanfile
-dist.ini
 doap.xml
 lib/DBIx/NoSQL.pm
 lib/DBIx/NoSQL/Class.pm
@@ -39,5 +38,4 @@ t/08-persist.t
 t/09-file-connection.t
 t/10-next.t
 t/Test.pm
-test
 xt/release/unused-vars.t
