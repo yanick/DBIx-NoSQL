@@ -37,4 +37,3 @@ t/08-persist.t
 t/09-file-connection.t
 t/10-next.t
 t/Test.pm
-xt/release/unused-vars.t
