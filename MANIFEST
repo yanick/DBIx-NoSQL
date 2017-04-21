@@ -1,3 +1,4 @@
+CONTRIBUTORS
 Changes
 INSTALL
 LICENSE
@@ -11,7 +12,6 @@ SIGNATURE
 cpanfile
 doap.xml
 lib/DBIx/NoSQL.pm
-lib/DBIx/NoSQL/Class.pm
 lib/DBIx/NoSQL/ClassScaffold.pm
 lib/DBIx/NoSQL/Entity.pm
 lib/DBIx/NoSQL/Model.pm
