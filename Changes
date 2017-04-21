@@ -9,6 +9,7 @@ Revision history for DBIx-NoSQL
     [BUGS]
     - CREATE TABLE regex modified. (GH#4, nebulous)
     - set the minimal DBD::SQLite to 1.44 (RT#106903)
+    - change test expected exception for newer DBD::SQLite.
 
 0.0020 Wednesday January 30 16:39:54 PST 2013:
     - Incorporate yanick's fixes to ->next
