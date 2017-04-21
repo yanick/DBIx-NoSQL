@@ -6,6 +6,7 @@ use warnings;
 use Moose;
 use Clone qw/ clone /;
 use Digest::SHA qw/ sha1_hex /;
+use Data::GUID;
 
 has store => qw/ is ro required 1 weak_ref 1 /, handles => [qw/ storage /];
 has name => qw/ reader name writer _name required 1 /;
@@ -95,6 +96,11 @@ sub set {
 
     my ( $entity, $data, $value );
 
+    if (ref($key) and !$target) {
+      $target = $key;
+      $key = Data::GUID->new->as_string;
+    }
+
     if ( blessed $target ) {
         $entity = $self->unwrap( $target );
         $target = $entity;
@@ -115,6 +121,7 @@ sub set {
     if ( $self->searchable ) {
         $self->index->update( $key => $data );
     }
+    return $key;
 }
 
 sub exists {

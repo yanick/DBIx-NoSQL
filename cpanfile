@@ -5,6 +5,7 @@ requires "DBIx::Class" => "0.08124";
 requires "DBIx::Class::Core" => "0";
 requires "DBIx::Class::SQLMaker" => "0";
 requires "DBIx::Class::Schema" => "0";
+requires "Data::GUID" => "0";
 requires "Digest::SHA" => "0";
 requires "Hash::Merge::Simple" => "0";
 requires "JSON" => "0";
