@@ -1,5 +1,0 @@
-MANIFEST
-META.yml
-Makefile.PL
-lib/FutonDb.pm
-lib/FutonDb/ResultSet.pm
