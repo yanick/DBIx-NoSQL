@@ -5,6 +5,8 @@ Revision history for DBIx-NoSQL
     [IMPROVEMENT]
     - Switch from Any::Moose (which is deprecated) to Moose.
         (nebulous + yanick)
+    - set() now auto-generate the entry's key if not provided 
+        (and returns the key as its return value). (GH#3, nebulous)
 
     [BUGS]
     - CREATE TABLE regex modified. (GH#4, nebulous)
