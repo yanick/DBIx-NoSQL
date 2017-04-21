@@ -14,7 +14,9 @@ ok( $store );
 $store->connect( $store_file );
 ok( $store->dbh );
 
-throws_ok { $store->storage->do( 'Xyzzy' ) } qr/syntax error \[for Statement "Xyzzy"\]/;
+dies_ok {
+    $store->storage->do( 'Xyzzy' )
+} 'bad syntax';
 
 $model = $store->model( 'Album' );
 $model->field( name => ( index => 1 ) );
