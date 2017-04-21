@@ -1,6 +1,7 @@
 package DBIx::NoSQL::ClassScaffold;
+our $AUTHORITY = 'cpan:YANICK';
 # Scaffold
-
+$DBIx::NoSQL::ClassScaffold::VERSION = '0.0021';
 use strict;
 use warnings;
 
@@ -71,7 +72,8 @@ sub become_ResultClass_Store {
 }
 
 package DBIx::NoSQL::ClassScaffold::Schema;
-
+our $AUTHORITY = 'cpan:YANICK';
+$DBIx::NoSQL::ClassScaffold::Schema::VERSION = '0.0021';
 use Moose;
 
 extends qw/ DBIx::Class::Schema /;
@@ -117,7 +119,8 @@ sub deploy {
 }
 
 package DBIx::NoSQL::ClassScaffold::ResultClass;
-
+our $AUTHORITY = 'cpan:YANICK';
+$DBIx::NoSQL::ClassScaffold::ResultClass::VERSION = '0.0021';
 use strict;
 use warnings;
 
@@ -133,3 +136,39 @@ sub register {
 
 1;
 
+__END__
+
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+DBIx::NoSQL::ClassScaffold
+
+=head1 VERSION
+
+version 0.0021
+
+=head1 AUTHORS
+
+=over 4
+
+=item *
+
+Robert Krimen <robertkrimen@gmail.com>
+
+=item *
+
+Yanick Champoux <yanick@cpan.org>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2017 by Robert Krimen.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
