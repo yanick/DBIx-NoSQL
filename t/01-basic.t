@@ -27,7 +27,7 @@ $store->model( 'Artist' )->set( 2 => { Xyzzy => 2 } );
 $store->model( 'Artist' )->set( 3 => { Xyzzy => 3 } );
 
 my $randid = $store->model( 'Artist' )->set( { moo => 'cow' });
-is(length($randid),48, 'Randomish id set');
+is length($randid),36, 'Randomish id set';
 
 ok( $store->exists( 'Artist' => 1 ) );
 ok( $store->exists( 'Artist' => 2 ) );

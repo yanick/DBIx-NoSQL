@@ -6,6 +6,7 @@ use warnings;
 use Moose;
 use Clone qw/ clone /;
 use Digest::SHA qw/ sha1_hex /;
+use Data::GUID;
 
 has store => qw/ is ro required 1 weak_ref 1 /, handles => [qw/ storage /];
 has name => qw/ reader name writer _name required 1 /;
@@ -97,7 +98,7 @@ sub set {
 
     if (ref($key) and !$target) {
       $target = $key;
-      $key = substr(sprintf("%x",time).sha1_hex(int(rand(time))),0,48);
+      $key = Data::GUID->new->as_string;
     }
 
     if ( blessed $target ) {

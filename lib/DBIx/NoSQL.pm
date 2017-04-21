@@ -85,7 +85,11 @@ If the SQLite database file at C<$path> does not exist, it will be created
 
 Set C<$key> (a string) to C<$value> (a HASH reference) in C<$model>
 
-If C<$model> has index, this command will also update the index entry corresponding to C<$key>
+If C<$model> has index, this command will also update the index entry corresponding to C<$key>.
+
+The C<$key> can be omitted, in which case a UUID key will be auto-generated for the entry.
+
+Returns the new entry's key.
 
 =head2 $value = $store->exists( $model, $key )
 
